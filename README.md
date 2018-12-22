@@ -55,6 +55,14 @@
 - Xiaoshuo
 - Jiandansousuo
 
+## Jenkins Env
+
+变量名 | 值 | 备注
+--- | --- | ---
+JENKINS | `true` | 表示当前使用 Jenkins 编译
+CI | `true` | 表示当前是 CI 流程
+ENV_LABEL | bj01、sg01、sg02 | 表示当前编译环境的标签
+
 ## ELK 日志
 
 接入日志：
