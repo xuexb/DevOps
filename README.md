@@ -51,5 +51,6 @@
     - Deploy-oauth-demo - 部署 <https://xuexb.com/web-oauth-app/> oAuth2.0 第三方登录示例站点到 bj01
     - Deploy-github-bot - 部署 <https://github.com/xuexb/github-bot/> 站点到 bj01
     - Deploy-sso-demo - 部署 SSO 单点登录示例站点到 bj01
+    - Auto-back-data - 定期把数据库的数据备份到本地，其他配置都在 GitHub 不用备份，资态图片在 CDN 中不用备份
 - Xiaoshuo
 - Jiandansousuo
