@@ -3,7 +3,8 @@
 
 ## Docker-compose Demo
 
-- [Docker 部署 Jenkins + GitLab + Nginx](./jenkins-gitlab-nginx)
+- [x] [Docker 部署 Jenkins + GitLab + Nginx](./jenkins-gitlab-nginx)
+- [ ] Docker 部署 ELK + Nginx + Node.js
 
 ## 服务器
 
