@@ -1,6 +1,10 @@
 # DevOps
 我的 DevOps 学习历程，由于是初探未知宇宙，可能随时更新文档。恩，没事了就搞一搞。
 
+## Docker-compose Demo
+
+- [Docker 部署 Jenkins + GitLab + Nginx](./jenkins-gitlab-nginx)
+
 ## 服务器
 
 机房 | 配置 | 标签 | 特点
