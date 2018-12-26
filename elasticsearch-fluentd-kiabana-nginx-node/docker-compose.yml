@@ -26,8 +26,6 @@ services:
     build: ./fluentd
     volumes:
       - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf
-    ports:
-      - 8888:8888
     restart: always
     depends_on:
       - elasticsearch
