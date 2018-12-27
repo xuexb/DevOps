@@ -17,8 +17,6 @@ services:
   elasticsearch:
     container_name: Elasticsearch
     image: 'elasticsearch:6.5.4'
-    ports:
-      - 9200:9200
     restart: always
 
   fluentd:
