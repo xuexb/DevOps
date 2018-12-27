@@ -18,10 +18,10 @@
 
 ## 端口说明
 
-- 80 - Nginx 暴露 Web Server 端口
-- 9200 - Elasticsearch 内部端口
-- 5610 - Kibana 内部端口，对外访问由 Nginx 代理到 `kibana.fe.com`
-- 8989、8988 - Fluentd 内部 UDP 端口
+- `80` - Nginx 暴露 Web Server 端口
+- `9200` - Elasticsearch 内部端口
+- `5610` - Kibana 内部端口，对外访问由 Nginx 代理到 `kibana.fe.com`
+- `8989、8988` - Fluentd 内部 UDP 端口
 
 ## 目录
 
