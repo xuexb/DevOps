@@ -23,7 +23,7 @@ services:
     container_name: Fluentd
     build: ./fluentd
     volumes:
-      - ./fluentd/fluent.conf:/fluentd/etc/fluent.conf
+      - ./fluentd:/fluentd/etc/
     restart: always
     depends_on:
       - elasticsearch
@@ -31,8 +31,6 @@ services:
   kibana:
     container_name: 'Kibana'
     image: kibana:6.5.4
-    ports:
-      - 5601:5601
     restart: always
     depends_on:
       - fluentd
