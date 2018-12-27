@@ -4,7 +4,8 @@
 ## Docker-compose Demo
 
 - [x] [Docker 部署 Jenkins + GitLab + Nginx](./jenkins-gitlab-nginx)
-- [ ] Docker 部署 ELK + Nginx + Node.js
+- [x] [Docker 部署 EFK + Nginx + Node.js 日志接入](./elasticsearch-fluentd-kiabana-nginx-node)
+- [ ] 使用 Jenkins + Docker 部署应用
 
 ## 服务器
 
