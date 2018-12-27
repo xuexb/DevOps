@@ -10,7 +10,7 @@ trim_trailing_whitespace = true
 [*.{js,vue,scss}]
 insert_final_newline = true
 
-[*.{json,yml}]
+[*.{json,yml,conf}]
 indent_size = 2
 
 [*.md]
