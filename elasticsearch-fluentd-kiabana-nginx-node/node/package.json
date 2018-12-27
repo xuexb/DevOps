@@ -1,0 +1,9 @@
+{
+  "name": "node-example",
+  "version": "0.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "fluent-logger": "^3.2.2"
+  }
+}
