@@ -49,20 +49,27 @@
     └── package.json
 ```
 
+## Kibana 常用字段说明
+
+- `env` - 标签，用来区分项目
+- `env_source` - 标签来源，如：`node`、`nginx`
+- `env_level` - 日志类型，如：`access`、`error`、`debug`、`info`
+- `env_timestamp` - 日志源（Node.js、Nginx）发生时间，而`@timestamp` 是写入 ES 时的时间
+
 ## Nginx 日志接入
 
 使用 `log_format` 配置一个 Fluentd 的日志格式，在使用时直接接入 Fluentd syslog 日志，如：
 
 ```
-access_log syslog:server=Fluentd:8989,tag=www_fe_com Fluentd;
-error_log syslog:server=Fluentd:8988,tag=www_fe_com error;
+access_log syslog:server=Fluentd:8989,tag=www Fluentd;
+error_log syslog:server=Fluentd:8988,tag=www error;
 ```
 
 字段说明：
 
 - `8989` - Fluentd 暴露的 `nginx.access` 收集端口
 - `8988` - Fluentd 暴露的 `nginx.error` 收集端口
-- `tag=www_fe_com` - 使用 `tag` 透传一个日志中的 `app` 字段，用来做产品线/名称的筛选条件
+- `tag=www` - 使用 `tag` 透传一个日志中的 `env` 字段，用来做产品线/名称的筛选条件
 - Fluentd - Fluentd 服务容器名，在 Docker 内直连
 - `error_log ... error` - 错误日志等级
 
