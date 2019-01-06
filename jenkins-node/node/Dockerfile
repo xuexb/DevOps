@@ -1,10 +1,17 @@
-FROM ubuntu:latest
+FROM dockerxman/docker-ubuntu-ssh:latest
+LABEL MAINTAINER xuexb <fe.xiaowu@gmail.com>
 
-RUN apt-get update
-RUN apt-get install -y openssh-server net-tools vim iputils-ping
-RUN mkdir -p /root/.ssh/
-RUN echo root:123456 | chpasswd
-RUN sed -i 's/#PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN /etc/init.d/ssh start
+RUN mkdir -p /root/app
+WORKDIR /root/app/
 
-EXPOSE 22
+RUN wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+RUN export NVM_DIR="$HOME/.nvm" \
+    && export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node \
+    && \. "$NVM_DIR/nvm.sh" \
+    && \. "$NVM_DIR/bash_completion" \
+    && nvm install node --lts \
+    && nvm alias default stable \
+    && npm install -g yarn pm2 --registry=https://registry.npm.taobao.org \
+    && yarn --registry=https://registry.npm.taobao.org
+
+EXPOSE 3000
