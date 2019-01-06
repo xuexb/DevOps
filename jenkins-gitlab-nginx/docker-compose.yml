@@ -15,6 +15,9 @@ services:
     restart: always
     ports:
       - '22:22'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+       external_url 'http://gitlab.fe.com'
     volumes:
       - './gitlab/config:/etc/gitlab'
       - './gitlab/logs:/var/log/gitlab'
