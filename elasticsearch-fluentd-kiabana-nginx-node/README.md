@@ -15,6 +15,7 @@
 - `www.fe.com` - 测试 www 首页
 - `www2.fe.com` - 测试 www2 首页
 - `kibana.fe.com` - 日志监控平台
+- `node.fe.com` - 模拟一个 Node.js 后端服务
 
 ## 端口说明
 
@@ -74,7 +75,21 @@ error_log syslog:server=Fluentd:8988,tag=www error;
 - `error_log ... error` - 错误日志等级
 
 ## Node.js 日志接入
-todo
+
+统一使用 [fluent-logger](https://www.npmjs.com/package/fluent-logger) 写入 Fluentd 日志，扩展一个 [logger.js](./node/logger.js) ，使用如：
+
+```js
+const Logger = require('./logger');
+const logger = new Logger({
+    env: '环境标识',
+});
+
+logger.info(string);
+logger.debug({
+    message: '',
+    test: 1,
+});
+```
 
 ## 参考链接
 

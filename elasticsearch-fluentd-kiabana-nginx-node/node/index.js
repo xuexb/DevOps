@@ -1,12 +1,8 @@
-const logger = require('fluent-logger').createFluentSender('node', {
-    host: 'localhost',
-    port: 24224,
-    timeout: 3.0,
-    reconnectInterval: 600000,
-});
+const Koa = require('koa');
+const router = require('./router');
+const app = new Koa();
 
-logger.emit('follow', {
-    from: 'userA',
-    to: 'userB',
-    t: Date.now(),
-});
+app
+    .use(router.routes())
+    .use(router.allowedMethods())
+    .listen(3000);

@@ -13,11 +13,19 @@ services:
     restart: always
     depends_on:
       - kibana
+      - node
 
   elasticsearch:
     container_name: Elasticsearch
     image: 'elasticsearch:6.5.4'
     restart: always
+
+  node:
+    container_name: Node
+    build: ./node
+    restart: always
+    depends_on:
+      - fluentd
 
   fluentd:
     container_name: Fluentd

@@ -3,7 +3,13 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
-    "fluent-logger": "^3.2.2"
+    "fluent-logger": "^3.2.2",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "moment": "^2.23.0"
   }
 }
