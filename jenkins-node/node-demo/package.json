@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "koa": "^2.6.2"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo 'test'",
+    "build": "mkdir -p dist && cp -r deploy.sh index.js package.json yarn.lock dist/"
+  },
+  "name": "node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
