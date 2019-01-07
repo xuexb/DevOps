@@ -2,14 +2,14 @@ version: '3'
 
 services:
   jenkins:
-    container_name: 'Jenkins'
+    container_name: jenkins
     image: 'jenkins/jenkins:lts'
     restart: always
     volumes:
       - './jenkins/data:/var/jenkins_home'
 
   gitlab:
-    container_name: 'GitLab'
+    container_name: gitlab
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     environment:
@@ -23,7 +23,7 @@ services:
       - './gitlab/data:/var/opt/gitlab'
 
   nginx:
-    container_name: 'Nginx'
+    container_name: nginx
     image: nginx:alpine
     volumes:
       - './html:/usr/share/nginx/html'
@@ -42,56 +42,46 @@ services:
       - node5
 
   node1:
-    container_name: 'Node-1'
+    container_name: node1
     build: './node'
     tty: true
     env_file: .env
     environment:
       - ENV_LABEL=node1
       - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
-    ports:
-      - '2221:22'
 
   node2:
-    container_name: 'Node-2'
+    container_name: node2
     build: './node'
     tty: true
     env_file: .env
     environment:
       - ENV_LABEL=node2
       - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
-    ports:
-      - '2222:22'
 
   node3:
-    container_name: 'Node-3'
+    container_name: node3
     build: './node'
     tty: true
     env_file: .env
     environment:
       - ENV_LABEL=node3
       - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
-    ports:
-      - '2223:22'
 
   node4:
-    container_name: 'Node-4'
+    container_name: node4
     build: './node'
     tty: true
     env_file: .env
     environment:
       - ENV_LABEL=node4
       - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
-    ports:
-      - '2224:22'
 
   node5:
-    container_name: 'Node-5'
+    container_name: node5
     build: './node'
     tty: true
     env_file: .env
     environment:
       - ENV_LABEL=node5
       - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
-    ports:
-      - '2225:22'
