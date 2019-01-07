@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo 'test'",
-    "build": "mkdir -p dist && cp -r deploy.sh index.js package.json yarn.lock dist/"
+    "build": "mkdir -p dist && ls | grep -vE '(README\\.md|dist)' | xargs -I {} cp -r {} dist/"
   },
   "name": "node",
   "version": "1.0.0",
