@@ -25,4 +25,4 @@ yarn -v
 cd $APP_DIR
 yarn
 
-pm2 startOrReload app.config.js
+pm2 startOrReload pm2.js
