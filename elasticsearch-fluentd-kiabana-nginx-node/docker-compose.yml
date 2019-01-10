@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    container_name: Nginx
+    container_name: nginx
     image: 'nginx:alpine'
     volumes:
       - './html:/usr/share/nginx/html'
@@ -16,19 +16,19 @@ services:
       - node
 
   elasticsearch:
-    container_name: Elasticsearch
+    container_name: elasticsearch
     image: 'elasticsearch:6.5.4'
     restart: always
 
   node:
-    container_name: Node
+    container_name: node
     build: ./node
     restart: always
     depends_on:
       - fluentd
 
   fluentd:
-    container_name: Fluentd
+    container_name: fluentd
     build: ./fluentd
     volumes:
       - ./fluentd:/fluentd/etc/
@@ -37,10 +37,10 @@ services:
       - elasticsearch
 
   kibana:
-    container_name: 'Kibana'
+    container_name: kibana
     image: kibana:6.5.4
     restart: always
     depends_on:
       - fluentd
     environment:
-      ELASTICSEARCH_URL: http://Elasticsearch:9200
+      ELASTICSEARCH_URL: http://elasticsearch:9200
