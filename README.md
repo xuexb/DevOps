@@ -5,6 +5,6 @@
 
 - [x] [Docker 部署 Jenkins + GitLab + Nginx](./jenkins-gitlab-nginx)
 - [x] [Docker 部署 EFK + Nginx + Node.js 日志接入](./elasticsearch-fluentd-kiabana-nginx-node)
-- [ ] [使用 Jenkins 多机器部署 Node.js 应用](./jenkins-node)
+- [x] [使用 Jenkins 多机器部署 Node.js 应用](./jenkins-node)
 - [ ] 使用 Jenkins + Docker 部署应用
 - [ ] 前端小武博客 DevOps 部署
