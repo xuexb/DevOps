@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  www1:
+    container_name: www1
+    image: nginx:alpine
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './nginx/vhost:/etc/nginx/vhost'
+    restart: always
+    networks:
+      inner:
+        ipv4_address: 192.168.100.101
+
+  www2:
+    container_name: www2
+    image: nginx:alpine
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './nginx/vhost:/etc/nginx/vhost'
+    restart: always
+    networks:
+      inner:
+        ipv4_address: 192.168.100.102
+
+networks:
+  inner:
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.100.1/24
