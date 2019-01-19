@@ -2,7 +2,7 @@ version: '3'
 
 services:
   jenkins:
-    container_name: 'Jenkins'
+    container_name: jenkins
     image: 'jenkins/jenkins:lts'
     restart: always
     volumes:
@@ -10,7 +10,7 @@ services:
       - './jenkins/data:/var/jenkins_home'
 
   gitlab:
-    container_name: 'GitLab'
+    container_name: gitlab
     image: 'gitlab/gitlab-ce:latest'
     restart: always
     ports:
@@ -24,7 +24,7 @@ services:
       - './gitlab/data:/var/opt/gitlab'
 
   nginx:
-    container_name: 'Nginx'
+    container_name: nginx
     depends_on:
       - jenkins
       - gitlab
@@ -38,7 +38,7 @@ services:
     restart: always
 
   dns:
-    container_name: 'DNS'
+    container_name: dns
     image: 'jpillora/dnsmasq'
     ports:
       # - 8080:8080
