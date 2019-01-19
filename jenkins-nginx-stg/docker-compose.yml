@@ -1,31 +1,88 @@
 version: '3'
 
 services:
+  # 虚拟机1
   www1:
     container_name: www1
-    image: nginx:alpine
+    build: ./www-app
     volumes:
       - './nginx/nginx.conf:/etc/nginx/nginx.conf'
-      - './nginx/vhost:/etc/nginx/vhost'
+      - './nginx/www1:/etc/nginx/vhost'
     restart: always
+    env_file: .env
+    environment:
+      - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
     networks:
       inner:
-        ipv4_address: 192.168.100.101
+        ipv4_address: 192.168.1.101
 
+  # 虚拟机2
   www2:
     container_name: www2
+    build: ./www-app
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './nginx/www2:/etc/nginx/vhost'
+    restart: always
+    env_file: .env
+    environment:
+      - AUTHORIZED_KEYS=${AUTHORIZED_KEYS}
+    networks:
+      inner:
+        ipv4_address: 192.168.1.102
+
+  # 负载均衡
+  proxy:
+    container_name: proxy
     image: nginx:alpine
     volumes:
       - './nginx/nginx.conf:/etc/nginx/nginx.conf'
-      - './nginx/vhost:/etc/nginx/vhost'
+      - './nginx/proxy:/etc/nginx/vhost'
     restart: always
+    ports:
+      - 80:80
+    extra_hosts:
+      - prd_www1:192.168.1.101
+      - prd_www2:192.168.1.102
     networks:
       inner:
-        ipv4_address: 192.168.100.102
+        ipv4_address: 192.168.1.100
+
+  # 用户机器
+  user:
+    container_name: user
+    build: ./user
+    restart: always
+    tty: true
+    volumes:
+      - './ssh:/root/.ssh'
+    extra_hosts:
+      - www.fe.com:192.168.1.100
+      - gogs.fe.com:192.168.1.100
+    networks:
+      - inner
+
+  # git server
+  gogs:
+    container_name: gogs
+    image: gogs/gogs
+    networks:
+      - inner
+    volumes:
+      - ./gogs:/data
+
+  jenkins:
+    container_name: jenkins
+    image: 'jenkins/jenkins:lts'
+    restart: always
+    volumes:
+      - './jenkins:/var/jenkins_home'
+    networks:
+      - inner
 
 networks:
   inner:
     ipam:
       driver: default
       config:
-      - subnet: 192.168.100.1/24
+      - subnet: 192.168.1.1/24
