@@ -42,6 +42,7 @@ services:
     ports:
       - 80:80
     extra_hosts:
+      # 注意这里主要和 nginx/proxy/www.conf 中的 upstream 对应
       - prd_www1:192.168.1.101
       - prd_www2:192.168.1.102
     networks:
@@ -54,11 +55,8 @@ services:
     build: ./user
     restart: always
     tty: true
-    volumes:
-      - './ssh:/root/.ssh'
     extra_hosts:
       - www.fe.com:192.168.1.100
-      - gogs.fe.com:192.168.1.100
     networks:
       - inner
 
