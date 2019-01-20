@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  jenkins:
+    container_name: jenkins
+    image: 'jenkins/jenkins:lts'
+    restart: always
+    volumes:
+      - './jenkins:/var/jenkins_home'
+
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    volumes:
+      - './nginx/nginx.conf:/etc/nginx/nginx.conf'
+      - './nginx/vhost:/etc/nginx/vhost'
+    restart: always
+    ports:
+      - 80:80

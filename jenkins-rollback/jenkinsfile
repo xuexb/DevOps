@@ -1,0 +1,161 @@
+properties([
+    parameters(
+        [
+            [
+                $class: 'ChoiceParameter', 
+                choiceType: 'PT_SINGLE_SELECT', 
+                description: '''\
+选择构建类型：
+deploy - 部署
+rollback - 回滚''', 
+                filterLength: 1, 
+                filterable: false, 
+                name: 'type', 
+                randomName: 'choice-parameter-69483043309720', 
+                script: [
+                    $class: 'GroovyScript', 
+                    fallbackScript: [
+                        classpath: [], 
+                        sandbox: false, 
+                        script: ''
+                    ], 
+                    script: [
+                        classpath: [], 
+                        sandbox: false, 
+                        script: '''\
+return [
+    "deploy",
+    "rollback"
+];'''
+                    ]
+                ]
+            ], 
+            [
+                $class: 'CascadeChoiceParameter', 
+                choiceType: 'PT_SINGLE_SELECT', 
+                description: '回滚源，根据之前构建成功的任务的列表生成', 
+                filterLength: 1, 
+                filterable: true, 
+                name: 'rollback_ref', 
+                randomName: 'choice-parameter-69483048065305', 
+                referencedParameters: 'type', 
+                script: [
+                    $class: 'GroovyScript', 
+                    fallbackScript: [
+                        classpath: [], 
+                        sandbox: false, 
+                        script: ''
+                    ], 
+                    script: [
+                        classpath: [], 
+                        sandbox: false, 
+                        script: '''\
+if (type.equals("deploy")) {
+    return [
+        "--"
+    ];
+} else if (type.equals("rollback")) {
+    ref=["/bin/bash", "-c", "ls /var/jenkins_home/backup/test/webapp-pipeline"].execute().text.readLines();
+    return ref;
+} else {
+    return ["Unknown action"];
+}'''
+                    ]
+                ]
+            ], 
+            string(
+                defaultValue: '', 
+                description: '发布源，如：分支或者标签', 
+                name: 'deploy_ref', 
+                trim: true
+            )
+        ]
+    )
+])
+
+pipeline {
+    agent any
+
+    environment {
+        // BACKUP_BASE_PATH = "${JENKINS_HOME}/${JOB_NAME}"
+        BUILD_DISPLAY_NAME = "${type}-${BUILD_NUMBER}"
+        BACKUP_BASE_PATH = '/var/jenkins_home/backup/test/webapp-pipeline'
+        BACKUP_PATH = "${BACKUP_BASE_PATH}/${BUILD_DISPLAY_NAME}"
+    }
+
+    options {
+        timestamps()
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                script {
+                    // 如果是部署
+                    if (type == 'deploy' && )
+                    currentBuild.displayName = BUILD_DISPLAY_NAME
+                }
+            }
+        }
+
+        stage('Rollback Code') {
+            when {
+                expression { params.type == 'rollback' }
+            }
+
+            steps {
+                echo "开始从 ${rollback_ref} 回滚"
+                sh "mkdir -p dist/"
+                sh "cp -r ${BACKUP_BASE_PATH}/${rollback_ref} dist/"
+            }
+        }
+
+        stage('Clone code') {
+            when {
+                expression { params.type == 'deploy' }
+            }
+
+            steps {
+                echo "git clone test ${deploy_ref}"
+            }
+        }
+
+        stage('Build') {
+            when {
+                expression { params.type == 'deploy' }
+            }
+
+            steps {
+                echo 'build test'
+                sh "mkdir -p dist/"
+                sh "echo 'dist/' > dist/.gitignore"
+                sh "echo \"`date '+%Y-%m-%d@%s'`\" > dist/index.html"
+            }
+        }
+
+      
+        stage('Backup') {
+            when {
+                expression { params.type == 'deploy' }
+            }
+
+            steps {
+                sh "mkdir -p ${BACKUP_PATH}"
+                sh "cp -r dist/* ${BACKUP_PATH}/"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'ls dist/'
+                echo 'Deploy test'
+            }
+        }
+    }
+
+    post {
+        always {
+            deleteDir()
+        }
+    }
+}
