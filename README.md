@@ -7,7 +7,7 @@
 - [x] [Docker 部署 EFK + Nginx + Node.js 日志接入](./elasticsearch-fluentd-kiabana-nginx-node)
 - [x] [使用 Jenkins 多机器部署 Node.js 应用](./jenkins-node)
 - [x] [Jenkins + Nginx 灰度发布](./jenkins-nginx-stg)
-- [ ] Jenkins 快速回滚
+- [x] [Jenkins 快速回滚](https://xuexb.com/post/jenkins-rollback.html)
 - [ ] 使用 Jenkins + Docker 部署应用
 - [ ] Jenkins + Kubernetes 部署应用
 - [ ] 前端小武博客 DevOps 部署
