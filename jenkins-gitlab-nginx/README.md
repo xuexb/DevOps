@@ -17,7 +17,7 @@
 - `jenkins.fe.com` - Jenkins
 - `gitlab.fe.com` - GitLab
 - `项目名--分支名.branch.fe.com` - 分支预览，如：`demo--master.branch.fe.com`
-- `项目名--PRID.pr.fe.com` - PR 预览，如：`demo--1.branch.fe.com`
+- `项目名--PRID.pr.fe.com` - PR 预览，如：`demo--1.pr.fe.com`
 
 ## 目录
 
