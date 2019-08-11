@@ -86,10 +86,10 @@ class Logger {
  */
 Logger.defaults = {
     env: 'default',
-    host: 'Fluentd',
+    host: 'fluentd',
     port: 24224,
     timeout: 3.0,
-    reconnectInterval: 600000,
+    reconnectInterval: 1000 * 10,
 };
 
 module.exports = Logger;
