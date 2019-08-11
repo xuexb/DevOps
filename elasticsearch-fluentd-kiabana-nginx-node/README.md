@@ -10,7 +10,7 @@
 
 ## 域名规则
 
-需要配置本地 Hosts ：`127.0.0.1 fe.com www.fe.com www2.fe.com kibana.fe.com` 。
+需要配置本地 Hosts ：`127.0.0.1 fe.com www.fe.com www2.fe.com kibana.fe.com node.fe.com` 。
 
 - `www.fe.com` - 测试 www 首页
 - `www2.fe.com` - 测试 www2 首页
@@ -32,6 +32,7 @@
 ├── fluentd                             - Fluentd 编译
 │   ├── Dockerfile
 │   ├── conf
+│   │   ├── node.conf                   - Node.js 日志配置
 │   │   ├── nginx-access.conf           - Nginx access 日志收集配置
 │   │   └── nginx-error.conf            - Nginx error 日志收集配置
 │   ├── fluent.conf                     - Fluentd 配置
@@ -42,6 +43,7 @@
 ├── nginx
 │   ├── nginx.conf                      - Nginx 主配置
 │   └── vhost
+│       ├── node.conf                   - node.fe.com 配置
 │       ├── kibana.conf                 - kibana.fe.com 配置
 │       ├── www.conf                    - www.fe.com 配置
 │       └── www2.conf                   - www2.fe.com 配置
