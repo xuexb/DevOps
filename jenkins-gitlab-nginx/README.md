@@ -19,6 +19,13 @@
 - `项目名--分支名.branch.fe.com` - 分支预览，如：`demo--master.branch.fe.com`
 - `项目名--PRID.pr.fe.com` - PR 预览，如：`demo--1.pr.fe.com`
 
+### 注意
+
+由于是 Docker Compose 方式运行，服务内部访问时需要使用别名，如：
+
+- Jenkins - `http://jenkins:8080`
+- GitLab - `http://gitlab` 、`ssh git@gitlab:user/repo`
+
 ## 目录
 
 ```
